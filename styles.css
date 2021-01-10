@@ -1,0 +1,67 @@
+/*@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display:900&display=swap');*/
+
+html {
+  min-height: 100%;  /*prevents the vertical background from repeating */
+}
+
+body {
+  /*background: #0575E6;*/  /* fallback for old browsers */
+  /*background: -webkit-linear-gradient(to top, #021B79, #0575E6);*/  /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(to bottom, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  font-family: 'Red Hat Display', Helvetica, sans-serif;
+}
+
+h1 {
+  color: rgb(230, 245, 255);
+  text-align: center;
+}
+
+h2 {
+  color: rgb(230, 245, 255);
+}
+
+.row-buttons {
+  text-align: center;
+
+}
+
+.btn {
+  color: rgb(230, 245, 255);
+  background: none;
+  border: 2px solid rgb(230, 245, 255);
+  border-radius: 6px;
+
+  display:inline-block;
+  cursor: pointer;
+
+  width: 20%;
+  height: 250px;
+  margin-right:30px;
+  padding: 16px 32px;
+
+  font-weight: bold;
+  font-size: 25px;
+
+  transition-duration: 0.3s;
+
+}
+
+
+.btn:hover{
+  color: #056ede;
+  background-color: rgb(230, 245, 255);
+  border: 2px solid rgb(230, 245, 255);
+  text-transform: uppercase;
+  width: 25%;
+}
+/*
+.button {
+-webkit-appearance: button;
+-moz-appearance: button;
+appearance: button;
+
+text-decoration: none;
+color: lightblue;
+}
+*/
