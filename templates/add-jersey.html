@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/add-jersey.css') }}">
+    <title>Add Jersey</title>
+  </head>
+  <body>
+    <h1 color="white" align="center ">Inventory Management System</h1>
+    <hr color="#99d6ff">
+    <h2>Add Jersey</h2>
+    <br>
+    {{errors}}
+    <p class="text">Please enter the following information:</p>
+    <form method="post" action="{{url_for('addJersey')}}">
+        <p><input name="Jersey number" type="number" placeholder="Jersey Number"/></p>
+        <p><input name="Team name" type="text" placeholder="Team Name" /></p>
+        <p><input name="Condition" type="text" placeholder="Condition" /></p>
+        <p><input name="Location" type="text" placeholder="Location" /></p>
+        <p><input name="Additional Comments" type="text" placeholder="Additional Comments" /></p>
+        <p><input type="submit" value="Add Jersey to Inventory" /></p>
+    </form>
+    <br>
+    <p><a href="/"><button>Return to Home</button></a></p>  
+  </body>
+</html>

@@ -1,0 +1,45 @@
+html {
+    min-height: 100%;  /*prevents the vertical background from repeating */
+  }
+  
+body {
+    /*background: #0575E6;*/  /* fallback for old browsers */
+    /*background: -webkit-linear-gradient(to top, #021B79, #0575E6);*/  /* Chrome 10-25, Safari 5.1-6 */
+    background-image: linear-gradient(to bottom, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+    font-family: 'Red Hat Display', Helvetica, sans-serif;
+  }
+  
+h1 {
+    color: rgb(230, 245, 255);
+    text-align: center;
+}
+
+h2 {
+    color: rgb(230, 245, 255);
+}
+
+button{
+    color: rgb(230, 245, 255);
+    background: none;
+    border: 2px solid rgb(230, 245, 255);
+    border-radius: 6px;
+
+    display:inline-block;
+    cursor: pointer;
+
+    width: 178px;
+    height: 20px;
+
+    font-weight: bold;
+
+    transition-duration: 0.3s;
+}
+
+button:hover{
+    color: #056ede;
+    background-color: rgb(230, 245, 255);
+    border: 2px solid rgb(230, 245, 255);
+    /*text-transform: uppercase;*/
+    
+}
