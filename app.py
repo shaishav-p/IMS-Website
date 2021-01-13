@@ -345,6 +345,73 @@ def inventoryFile():
     return contents
 
 
+@app.route('/view-sign-outs-for-team', methods = ["GET", "POST"])
+def viewTeamSignOuts():
+    errors = ""
+    if request.method == "POST":
+        generateSignedOutFile()
+        signOutFile = open("signOut.csv", "r+")
+        specificTeamFile = open("specific_team_signOut.csv", "w+")
+
+        teamChoice = str(request.form["Team name"]).strip()
+
+        jerseySignedOut = False
+        for line in signOutFile:
+            rowList = line.split(",")
+
+            # to stop the program from crashing as the last line is blank and thus it does not have multiple elements
+            if len(rowList) > 1:
+                name = rowList[1]  # makes variable equal to 2nd element in list (the team name)
+                name = "".join(name)  # converts list into string
+                name = name.strip()  # removes any spaces on either side of the name
+                if teamChoice.lower() == name.lower():
+                    #print(line)
+                    specificTeamFile.write(line)
+                    jerseySignedOut = True
+
+        if jerseySignedOut is False:
+            return render_template('view-team-sign-outs.html', errors="Currently, there are no jerseys signed for the {} team.".format(teamChoice))
+        signOutFile.close()
+        specificTeamFile.close()
+
+        return render_template('view-team-sign-outs-table.html', teamName=teamChoice)
+
+    
+    return render_template('view-team-sign-outs.html', errors=errors)
+
+def generateSignedOutFile():
+   inventory = open("inventory.csv", "r")
+   # 'r' is used to read the file
+   signOutFile = open("signOut.csv","w+")
+   # 'w+' is used so the contents of the old file are overwritten
+
+   numberOfClothesSignedOut = 0
+   for line in inventory:
+       infoLine = line.split(",")
+       if len(infoLine) > 1:
+           status = infoLine[3]
+           status = "".join(status)  # makes list into string
+           status = status.strip()
+
+           if status != "In inventory" and status != "Status":
+               numberOfClothesSignedOut = numberOfClothesSignedOut + 1
+               if numberOfClothesSignedOut == 1:
+                   # prints header on first line on file with labels for columns
+                   signOutFile.write("Number , Team Name , Condition , Status , Location, Comments \n")
+
+               signOutFile.write(line)
+
+   if numberOfClothesSignedOut == 0:
+       signOutFile.write("Currently no athletic wear is signed out.")
+
+
+@app.route('/specific_team_signOut.csv')
+def teamSignOutFile():
+    signOutInventory = open("specific_team_signOut.csv", "r")
+    contents = signOutInventory.read()
+    signOutInventory.close()
+
+    return contents
 
 
 
