@@ -135,7 +135,7 @@ def signOutJersey():
                     inventory = open("inventory.csv", "w+")
                     inventory.writelines(infoFile)
 
-                    return render_template('success.html', title="Sign Out Jersey", successMsg="successfully signed out jersey to {}".format(athleteName))
+                    return render_template('success.html', title="Sign Out Jersey", successMsg=" signed out jersey to {}".format(athleteName))
 
             lineNum = lineNum + 1 
         
@@ -243,7 +243,7 @@ def signInJersey():
 
                     historyFile.close()
                     
-                    return render_template('success.html', title="Sign In Jersey", successMsg="successfully signed in jersey.")
+                    return render_template('success.html', title="Sign In Jersey", successMsg=" signed in jersey.")
 
 
             lineNum = lineNum + 1
@@ -255,10 +255,85 @@ def signInJersey():
     return render_template('sign-in-jersey.html', errors=errors)
 
 
+@app.route('/edit-jersey', methods = ["GET", "POST"])
+def editJersey():
+    errors = ""
+    if request.method == "POST":
+        jerseyNumber = str(request.form["Jersey number"]).strip()
+        teamName = str(request.form["Team name"]).strip()
+        condition = str(request.form["Condition"])
+        location = str(request.form["Location"])
+        additionalComments = str(request.form["Additional comments"])
+
+        inventory = open("inventory.csv", "r+")  # 'r' is used to read the file
+        infoFile = inventory.readlines()
+
+        lineNum = 0
+        inventory = open("inventory.csv", "r+")  # 'r+' is used to read and write in the file
+
+        for line in inventory:
+            rowList = line.split(",")  # splits lineNum and creates list
+            number = rowList[0]  # makes variable equal to 1st element in list (the jersey number)
+            number = "".join(number)  # converts list into string
+            number = number.strip()  # removes any spaces on either side of the number
+
+            if str(jerseyNumber) == str(number):
+                name = rowList[1]  # makes variable equal to 2nd element in list (the team name)
+                name = "".join(name)  # converts list into string
+                name = name.strip()  # removes any spaces on either side of the name
+
+                if teamName.lower() == name.lower():
+                    infoList = []
+
+                    rowList[5] = rowList[5].rstrip("\n")
+                    # '\n' is stripped from the end of the list as new information needs to be added to the line
+
+                    infoList.append(jerseyNumber)
+                    infoList.append(",")
+                    # the "," is added as that will be used to split the row info bc/ info like team name might be 1+ word
+                    infoList.append(teamName)
+                    infoList.append(",")
+
+                    infoList.append(condition)
+                    infoList.append(",")
+
+                    infoList.append("In inventory")
+                    infoList.append(",")
+                    
+                    infoList.append(location)
+                    infoList.append(",")
+
+                    if len(additionalComments) != 0:
+                        infoList.append(additionalComments)
+                    else:
+                        infoList.append("N/A")
+
+                    infoList.append("\n")
+                    s = "\t"
+                    infoList = s.join(infoList)
+                    # print(infoList) #for debugging
+
+                    infoFile[lineNum] = infoList
+
+                    inventory = open("inventory.csv", "w+")
+                    inventory.writelines(infoFile)
+
+                    return render_template('success.html', title="Edit Jersey", successMsg=" editted jersey number {} from the {} team".format(jerseyNumber, teamName))
+
+            lineNum = lineNum + 1
+
+        #if reach end of for loop that means that jersey with the given jersey number and team DNE in inventory
+        errors += "A jersey with number {!r} and team name {!r} does not exist; check the inventory to make sure the jersey in the inventory.\nPlease enter valid jersey information.\n".format(jerseyNumber, teamName)
+
+    
+    return render_template('edit-jersey.html', errors=errors)
+
+
 @app.route('/view-inventory')
 def viewInventory():
 
     return render_template('view-inventory.html')
+
 
 
 @app.route('/inventory.csv')

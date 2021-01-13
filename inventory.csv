@@ -1,7 +1,7 @@
 Number , Team Name , Condition , Status , Location , Comments
-2	,	Basketball	,	Excellent	,	In inventory	,	Math Room	,	N/A	
+2	,	Basketball	,	Excellent	,	In inventory	,	Basement	,	Nice jersey	
 	2132	,	Basketball 	,	Bad	,	In inventory	,	Math Room	,	N/A
-	3	 , 	Soccer	 , 	Excellent	 , Signed out by: Rob Doe on Tue Jan 12 2021 , N/A , Rob is a v cool guy 
+3	,	Soccer	,	Good	,	In inventory	,	Math Room	,	N/A	
 	445	,	fg	,	dfgd	,	In inventory	,	dfgd	,	dsgd
 	343223	,	Baseball	,	Excellent	,	In inventory	,	Basement	,	N/A
 	23	,	Soccer	,	Good	,	In inventory	,	Basement	,	N/A
