@@ -22,6 +22,7 @@ def addJersey():
             errors += "<p>{!r} is not a number.</p>\n".format(request.form["Jersey number"])
         
         if jerseyNumber is not None:
+            infoList.append("\n")  # creates a new line for next time the text is appended
             infoList.append(str(jerseyNumber))
             # the "," is added as that will be used to split the row info bc/ info such as the team name can be 1+ words
             infoList.append(",")
@@ -55,10 +56,10 @@ def addJersey():
 
             fileSize = os.stat("inventory.csv").st_size
             if fileSize == 0:  # if fileSize equals 0, this indicates that the file is empty
-                inventory.write("Number , Team Name , Condition , Status , Location , Comments \n")
+                inventory.write("Number , Team Name , Condition , Status , Location , Comments")
 
             inventory.writelines(infoList)
-            inventory.write("\n")  # creates a new line for next time the text is appended
+            #inventory.write("\n")  # creates a new line for next time the text is appended
 
             inventory.close()
 
@@ -66,6 +67,28 @@ def addJersey():
 
 
     return render_template('add-jersey.html', errors=errors)
+
+
+
+
+@app.route('/view-inventory')
+def viewInventory():
+
+    return render_template('view-inventory.html')
+
+
+@app.route('/inventory.csv')
+def inventoryFile():
+    inventory = open("inventory.csv", "r")
+    contents = inventory.read()
+    inventory.close()
+
+    return contents
+
+
+
+
+
 
 #app.run(host='0.0.0.0', port=81)
 

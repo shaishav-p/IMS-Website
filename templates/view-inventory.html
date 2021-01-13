@@ -1,0 +1,61 @@
+<!--
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>CSV File to HTML Table Using AJAX jQuery</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="table-responsive">
+    <h1 align="center">CSV File to HTML Table Using AJAX jQuery</h1>
+    <br />
+    <div align="center">
+     <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
+    </div>
+    <br />
+    <div id="employee_table">
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+
+<script src="{{url_for('static', filename='JS/jQuery.js')}}"></script>
+-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/view-inventory.css') }}">
+    <title>Add Jersey</title>
+</head>
+
+<body>
+    <h1 color="white" align="center " class="heading">Inventory Management System</h1>
+    <hr color="#99d6ff">
+    <h2 class="description">View Inventory</h2>
+    <br>
+    <div class="container">
+        <div class="table-responsive">
+            <br>
+            <p> </p>
+            <div id="inventory_table">
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="button" name="load_data" id="load_data" class="btn btn-info" align="right">Load Inventory</button>
+    <p> </p>
+    <a href="/"><button>Return to Home</button></a>
+</body>
+
+</html>
+<script src="{{url_for('static', filename='JS/jQuery.js')}}"></script>
