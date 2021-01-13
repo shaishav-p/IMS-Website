@@ -4,13 +4,13 @@ import sys
 import os
 
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('home.html')
 
-@app.route('/add-jersey', methods = ["GET", "POST"])
+@application.route('/add-jersey', methods = ["GET", "POST"])
 def addJersey():
     errors = ""
     if request.method == "POST":
@@ -69,7 +69,7 @@ def addJersey():
     return render_template('add-jersey.html', errors=errors)
 
 
-@app.route('/sign-out-jersey', methods = ["GET", "POST"])
+@application.route('/sign-out-jersey', methods = ["GET", "POST"])
 def signOutJersey():
     errors = ""
     if request.method == "POST":
@@ -154,7 +154,7 @@ def Date():  # function returns current date
    return currentDate
 
 
-@app.route('/sign-in-jersey', methods = ["GET", "POST"])
+@application.route('/sign-in-jersey', methods = ["GET", "POST"])
 def signInJersey():
     errors = ""
     if request.method == "POST":
@@ -255,7 +255,7 @@ def signInJersey():
     return render_template('sign-in-jersey.html', errors=errors)
 
 
-@app.route('/edit-jersey', methods = ["GET", "POST"])
+@application.route('/edit-jersey', methods = ["GET", "POST"])
 def editJersey():
     errors = ""
     if request.method == "POST":
@@ -329,14 +329,14 @@ def editJersey():
     return render_template('edit-jersey.html', errors=errors)
 
 
-@app.route('/view-inventory')
+@application.route('/view-inventory')
 def viewInventory():
 
     return render_template('view-inventory.html')
 
 
 
-@app.route('/inventory.csv')
+@application.route('/inventory.csv')
 def inventoryFile():
     inventory = open("inventory.csv", "r")
     contents = inventory.read()
@@ -345,7 +345,7 @@ def inventoryFile():
     return contents
 
 
-@app.route('/view-sign-outs-for-team', methods = ["GET", "POST"])
+@application.route('/view-sign-outs-for-team', methods = ["GET", "POST"])
 def viewTeamSignOuts():
     errors = ""
     if request.method == "POST":
@@ -405,7 +405,7 @@ def generateSignedOutFile():
        signOutFile.write("Currently no athletic wear is signed out.")
 
 
-@app.route('/specific_team_signOut.csv')
+@application.route('/specific_team_signOut.csv')
 def teamSignOutFile():
     signOutInventory = open("specific_team_signOut.csv", "r")
     contents = signOutInventory.read()
@@ -416,7 +416,7 @@ def teamSignOutFile():
 
 
 
-#app.run(host='0.0.0.0', port=81)
+#application.run(host='0.0.0.0', port=81)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
