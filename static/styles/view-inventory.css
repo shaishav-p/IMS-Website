@@ -30,7 +30,7 @@ div.container div#inventory_table tr{
 }
 
 div.container div#inventory_table tr:first-child td{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.938);
     font-weight: bold;
 }
 

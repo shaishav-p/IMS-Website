@@ -69,7 +69,89 @@ def addJersey():
     return render_template('add-jersey.html', errors=errors)
 
 
+@app.route('/sign-out-jersey', methods = ["GET", "POST"])
+def signOutJersey():
+    errors = ""
+    if request.method == "POST":
+        #verify that a jersey with the given jersey number and team exists in inventory
+        jerseyNumber = request.form["Jersey number"]
+        teamName = str(request.form["Team name"]).strip()
+        athleteName = str(request.form["Athlete name"])
+        additionalComments = str(request.form["Additional comments"])
+        print("num: "+ jerseyNumber+ " team name: "+ teamName)
 
+        inventory = open("inventory.csv", "r+")  # 'r' is used to read the file
+        infoFile = inventory.readlines()
+        lineNum = 0
+        inventory = open("inventory.csv", "r+")  # 'r+' is used to read and write in the file
+
+        for line in inventory:
+            rowList = line.split(",")  # splits line and creates list
+            number = rowList[0]  # makes variable equal to list
+            number = "".join(number)
+            number = number.strip()
+            print("current loop num:" + number +"."+ str(jerseyNumber == number))
+            if str(jerseyNumber) == str(number):  # rowlist[0] is the team number
+                name = rowList[1]
+                name = "".join(name)
+                name = name.strip()
+                name = name.lower()
+                print("current loop name:" + name +"." + "team name:" + teamName.lower() +"."+ str(teamName.lower() == name))
+
+                if teamName.lower() == name:  # rowList[1] is the team name
+                    print("----> full match")
+                    infoList = []
+                    infoList.append(rowList[0])
+                    infoList.append(",")
+                    infoList.append(rowList[1])
+                    infoList.append(",")
+                    rowList[2] = rowList[2].rstrip("\n")
+                    infoList.append(rowList[2])
+                    infoList.append(",")
+
+                    infoList.append("Signed out by:")
+                    infoList.append(athleteName)
+                    infoList.append("on")
+
+                    currentDate = Date()
+                    infoList.append(currentDate)
+                    infoList.append(",")
+
+                    infoList.append("N/A")
+                    infoList.append(",")
+
+                    if len(additionalComments) != 0:
+
+                        infoList.append(additionalComments)
+                    else:
+                        infoList.append("N/A")
+
+                    infoList.append("\n")
+
+                    s = " "
+                    infoList = s.join(infoList)
+                    infoFile[lineNum] = infoList
+
+                    inventory = open("inventory.csv", "w+")
+                    inventory.writelines(infoFile)
+
+                    return render_template('success.html', title="Sign Out Jersey", successMsg="successfully signed out jersey to {}".format(athleteName))
+
+            lineNum = lineNum + 1 
+        
+        #if reach end of for loop that means that jersey with the given jersey number and team DNE in inventory
+        errors += "A jersey with number {!r} and team name {!r} does not exist; check the inventory to make sure the jersey in the inventory.\nPlease enter valid jersey information.\n".format(jerseyNumber, teamName)
+        
+
+    return render_template('sign-out-jersey.html', errors=errors)
+def Date():  # function returns current date
+   currentDateAndTime = time.asctime(time.localtime(time.time()))  # gives current date and time
+   currentDateAndTime = currentDateAndTime.split()
+   del currentDateAndTime[-2]  # removes time from list so the list now only contains the date
+   s = " "
+   # the date (including day of the week, day of the month, month, and year) is joined into one string
+   currentDate = s.join(currentDateAndTime)
+   return currentDate
 
 @app.route('/view-inventory')
 def viewInventory():
