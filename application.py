@@ -126,7 +126,7 @@ def signOutJersey():
                     else:
                         infoList.append("N/A")
 
-                    infoList.append("\n")
+                    #infoList.append("\n")
 
                     s = " "
                     infoList = s.join(infoList)
