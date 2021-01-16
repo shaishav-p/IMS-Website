@@ -82,6 +82,7 @@ def signOutJersey():
 
         inventory = open("inventory.csv", "r+")  # 'r' is used to read the file
         infoFile = inventory.readlines()
+        print(len(infoFile))
         lineNum = 0
         inventory = open("inventory.csv", "r+")  # 'r+' is used to read and write in the file
 
@@ -126,7 +127,8 @@ def signOutJersey():
                     else:
                         infoList.append("N/A")
 
-                    #infoList.append("\n")
+                    if (lineNum != (len(infoFile)-1) ):
+                        infoList.append("\n")
 
                     s = " "
                     infoList = s.join(infoList)
@@ -217,7 +219,9 @@ def signInJersey():
                         infoList.append(additionalComments)
                     else:
                         infoList.append("N/A")
-                    infoList.append("\n")
+
+                    if (lineNum != (len(infoFile)-1) ):
+                        infoList.append("\n")
 
                     s = "\t"
                     infoList = s.join(infoList)
@@ -308,7 +312,9 @@ def editJersey():
                     else:
                         infoList.append("N/A")
 
-                    infoList.append("\n")
+                    if (lineNum != (len(infoFile)-1) ):
+                        infoList.append("\n")
+                        
                     s = "\t"
                     infoList = s.join(infoList)
                     # print(infoList) #for debugging
