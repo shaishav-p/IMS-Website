@@ -37,7 +37,8 @@ h2 {
 
   width: 20%;
   height: 250px;
-  margin-right:30px;
+  margin: 40px;
+  /*margin-right:30px;*/
   padding: 16px 32px;
 
   font-weight: bold;
@@ -53,6 +54,7 @@ h2 {
   background-color: rgb(230, 245, 255);
   border: 2px solid rgb(230, 245, 255);
   text-transform: uppercase;
+  transform: translateY(-10px);
   /*width: 25%;*/
 }
 /*
