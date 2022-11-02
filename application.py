@@ -8,7 +8,6 @@ application = Flask(__name__)
 
 @application.route('/')
 def index():
-    # informative comment
     return render_template('home.html')
 
 @application.route('/add-jersey', methods = ["GET", "POST"])
